@@ -28,9 +28,9 @@ print(settings.screen_cof)
 
 
 pygame.display.set_caption('Quick Start')
-window_surface = pygame.display.set_mode((settings.Width, settings.Height), )
-
-background = pygame.Surface((settings.Width, settings.Height))
+window_surface = pygame.display.set_mode(settings.update((settings.Width, settings.Height)))
+print(settings.update((settings.Width, settings.Height)))
+background = pygame.Surface(settings.update((settings.Width, settings.Height)))
 background.fill(pygame.Color('#72C1F2'))
 
 scene = None
