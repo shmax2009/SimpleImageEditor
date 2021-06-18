@@ -19,8 +19,8 @@ class Scene:
         size = settings.update(size)
         print(position, size)
         button = pygame_gui.elements.UIButton(
-            relative_rect=pygame.Rect(position, settings.update(size)),
-            text=text,
+            relative_rect=pygame.Rect(position, size),
+            text="",
             manager=self.manager)
 
         self.add_text(rect.center, text, (0, 0, 0), font_)
@@ -48,7 +48,7 @@ class Scene:
         f_size = (fl_x, fl_y)
         image = pygame.transform.scale(image, f_size)
         x, y = position
-        sx, sy = settings.update(size)
+        sx, sy = size
         x = x + (sx - fl_x) / 2
         y = y + (sy - fl_y) / 2
         position = (x, y)

@@ -22,8 +22,6 @@ wd, hd = get_window()
 settings.coficient = (wd / settings.DisplayWidth, hd / settings.DisplayHeight)
 # print(settings.coficient)
 # wd, hd = 3840, 3400
-settings.screen_cof = (wd / settings.Width, hd / settings.Height)
-print(settings.screen_cof)
 # --get display size--
 
 

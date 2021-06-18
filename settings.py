@@ -8,6 +8,6 @@ coficient = (1, 1)
 
 
 def update(vect2: (int, int)):
-    a, b = vect2
-    x, y = screen_cof
-    return (a * x, b * y)
+    x, y = vect2
+    a, b = coficient
+    return (int(x * a), int(y * b))
