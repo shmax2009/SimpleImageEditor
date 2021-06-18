@@ -15,3 +15,4 @@ class Controller:
         im = Image.open(path)
         enh = ImageEnhance.Contrast(im)
         enh.enhance(factor / 100).save("color." + path.split(".")[-1])
+
