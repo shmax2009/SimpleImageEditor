@@ -10,6 +10,7 @@ class Scene:
         self.buttons = dict()
         self.texts = list()
         self.images = dict()
+        self.sliders = dict()
 
     def add_button(self, position: (int, int), size: (int, int), text: str):
         button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(position, size),
@@ -20,15 +21,20 @@ class Scene:
     def add_text(self, position: (int, int), text: str, color: (int, int, int),
                  font: pygame.font.Font):
         text_ = font.render(text, True, color)
-        textRect = text_.get_rect()
-        textRect.center = position
+        text_rect = text_.get_rect()
+        text_rect.center = position
 
-        self.texts.append((text_, textRect))
+        self.texts.append((text_, text_rect))
 
     def add_image(self, path: str, position: (int, int), size: (int, int), name: str):
         image = pygame.image.load(path)
         image = pygame.transform.scale(image, size)
         self.images[name] = (image, position)
+
+    def add_slider(self, rect: pygame.Rect, name: str):
+        slider = pygame_gui.elements.UIHorizontalSlider(rect, 100, (0, 200), manager=self.manager)
+        self.sliders[name] = slider
+        # slider.sliding_button
 
     def draw(self, window):
         self.manager.draw_ui(window)

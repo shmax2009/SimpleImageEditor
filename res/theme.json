@@ -46,5 +46,34 @@
       "shape_corner_radius": 10,
       "shape": "rounded_rectangle"
     }
+  },
+  "horizontal_slider": {
+    "colours": {
+      "normal_bg": "#2212F1",
+      "hovered_bg": "#35393e",
+      "disabled_bg": "#25292e",
+      "selected_bg": "#25292e",
+      "active_bg": "#193784",
+      "dark_bg": "#C3C5C4"
+    },
+    "misc": {
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "0",
+      "enable_arrow_buttons": "0",
+      "sliding_button_width": "25"
+    }
+  },
+  "horizontal_slider.button": {
+    "misc": {
+      "border_width": "1",
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "10"
+
+    }
+  },
+  "horizontal_slider.#sliding_button": {
+    "colours": {
+      "normal_bg": "#2212F1"
+    }
   }
 }
