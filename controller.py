@@ -13,6 +13,10 @@ class Controller:
 
     def apply_color(self, path: str, factor: float):
         im = Image.open(path)
-        enh = ImageEnhance.Contrast(im)
+        enh = ImageEnhance.Color(im)
         enh.enhance(factor / 100).save("color." + path.split(".")[-1])
 
+    def apply_sharpness(self, path: str, factor: float):
+        im = Image.open(path)
+        enh = ImageEnhance.Sharpness(im)
+        enh.enhance(factor / 100).save("sharp." + path.split(".")[-1])
