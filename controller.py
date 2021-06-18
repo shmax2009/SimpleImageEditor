@@ -1,23 +1,17 @@
-from transform import brighten, adjust_contrast, blur
-from image import Image
+from PIL import Image, ImageFilter
+from PIL import ImageEnhance
+
 
 class Controller:
     def __init__(self):
-        pass
+        ...
 
-    def apply_brighten(self, image_name, p):
-        image = Image(filename=image_name)
-        apply_brightened = brighten(image, p)
-        return apply_brightened
+    def apply_brighten(self, path: str, factor: float):
+        im = Image.open(path)
+        enh = ImageEnhance.Brightness(im)
+        enh.enhance(factor / 100).save("brightness." + path.split(".")[-1])
 
-    def apply_adjust_contrast(self, image_name, factor, mid=0.5):
-        image = Image(filename=image_name)
-        apply_contrast = adjust_contrast(image, factor, mid)
-        return apply_contrast
-
-    def apply_blur(self, image_name, k_s):
-        image = Image(filename=image_name)
-        applied_blur = blur(image, k_s)
-        return applied_blur
-
-
+    def apply_color(self, path: str, factor: float):
+        im = Image.open(path)
+        enh = ImageEnhance.Contrast(im)
+        enh.enhance(factor / 100).save("color." + path.split(".")[-1])

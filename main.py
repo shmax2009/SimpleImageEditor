@@ -132,7 +132,7 @@ while is_running:
                                     settings.Image_scale, "image")
                     print(scene.sliders["slider"].current_value)
                 if scene.name == "color scene" and event.ui_element == scene.sliders["slider"]:
-                    controller_for_image.apply_blur(image_path, scene.sliders["slider"].current_value)
+                    controller_for_image.apply_color(image_path, scene.sliders["slider"].current_value)
                     scene.add_image("color." + image_path.split(".")[-1], settings.Image_position,
                                     settings.Image_scale, "image")
         scene.manager.process_events(event)
