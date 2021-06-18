@@ -19,6 +19,8 @@ pygame.init()
 
 # --get display size--
 wd, hd = get_window()
+settings.coficient = (wd / settings.DisplayWidth, hd / settings.DisplayHeight)
+# print(settings.coficient)
 # wd, hd = 3840, 3400
 settings.screen_cof = (wd / settings.Width, hd / settings.Height)
 print(settings.screen_cof)
@@ -32,58 +34,61 @@ background = pygame.Surface((settings.Width, settings.Height))
 background.fill(pygame.Color('#72C1F2'))
 
 scene = None
-
-font = pygame.font.Font('res/arial.ttf', 20)
+min = int(min(settings.coficient))
+font = pygame.font.Font('res/arial.ttf', int(20 * min / 1.5))
 
 # initialize start menu scene
 start_menu = Scene('res/theme.json', "start menu")
-start_menu.add_button((580, 325), (120, 70), "get started")
-start_menu.add_text((620, 225), "Hi there,small photo editor for you is here", (0, 0, 0), font)
+start_menu.add_button((int(580 / 1.5), int(325 / 1.5)), (int(120 / 1.5), int(70 / 1.5)), "get started", font)
+start_menu.add_text((int(620 / 1.5), int(225 / 1.5)), "Hi there,small photo editor for you is here!!!!!!", (0, 0, 0),
+                    font)
 # initialize start menu scene
 
 # initialize second menu scene
 second_menu = Scene('res/theme.json', "second menu")
-second_menu.add_button((480, 325), (120, 70), "choose photo")
-second_menu.add_button((680, 325), (120, 70), "exit")
-second_menu.add_text((620, 225), "Hi there,small photo editor for you is here", (0, 0, 0), font)
+second_menu.add_button((int(480 / 1.5), int(325 / 1.5)), (int(120 / 1.5), int(70 / 1.5)), "choose photo", font)
+second_menu.add_button((int(680 / 1.5), int(325 / 1.5)), (int(120 / 1.5), int(70 / 1.5)), "exit", font)
+second_menu.add_text((int(620 / 1.5), int(225 / 1.5)), "Hi there,small photo editor for you is here", (0, 0, 0), font)
 # initialize second menu scene
 
 # initialize work scene
 work_scene = Scene('res/theme.json', "work scene")
-work_scene.add_button((165, 600), (200, 90), "Brightness")
-work_scene.add_button((415, 600), (200, 90), "Set Color")
-work_scene.add_button((665, 600), (200, 90), "Sharp")
-work_scene.add_button((915, 600), (200, 90), "exit")
-work_scene.add_button((0, 50), (150, 90), "save")
+work_scene.add_button((int(165 / 1.5), int(600 / 1.5)), (int(200 / 1.5), int(90 / 1.5)), "Brightness", font)
+work_scene.add_button((int(415 / 1.5), int(600 / 1.5)), (int(200 / 1.5), int(90 / 1.5)), "Set Color", font)
+work_scene.add_button((int(665 / 1.5), int(600 / 1.5)), (int(200 / 1.5), int(90 / 1.5)), "Sharp", font)
+work_scene.add_button((int(915 / 1.5), int(600 / 1.5)), (int(200 / 1.5), int(90 / 1.5)), "exit", font)
+work_scene.add_button((int(0 / 1.5), int(50 / 1.5)), (int(150 / 1.5), int(90 / 1.5)), "save", font)
 # initialize work  scene
 
 # initialize Brightness scene
 brightness_scene = Scene('res/theme.json', "brightness scene")
-rect = pygame.Rect(200, 600, 600, 30)
+rect = pygame.Rect(int(200 / 1.5), int(600 / 1.5), int(600 / 1.5), int(30 / 1.5))
 brightness_scene.add_slider(rect, "slider")
-brightness_scene.add_button((915, 600), (200, 90), "exit")
+brightness_scene.add_button((int(915 / 1.5), int(600 / 1.5)), (int(200 / 1.5), int(90 / 1.5)), "exit", font)
 
 # initialize Brightness scene
 
 
 # initialize Color scene
 color_scene = Scene('res/theme.json', "color scene")
-rect = pygame.Rect(200, 600, 600, 30)
+rect = pygame.Rect(int(200 / 1.5), int(600 / 1.5), int(600 / 1.5), int(30 / 1.5))
 color_scene.add_slider(rect, "slider")
-color_scene.add_button((915, 600), (200, 90), "exit")
+color_scene.add_button((int(915 / 1.5), int(600 / 1.5)), (int(200 / 1.5), int(90 / 1.5)), "exit", font)
 
 # initialize Color scene
+
+# initialize Sharp scene
+sharp_scene = Scene('res/theme.json', "sharp scene")
+rect = pygame.Rect(int(200 / 1.5), int(600 / 1.5), int(600 / 1.5), int(30 / 1.5))
+sharp_scene.add_slider(rect, "slider")
+sharp_scene.add_button((int(915 / 1.5), int(600 / 1.5)), (int(200 / 1.5), int(90 / 1.5)), "exit", font)
+# initialize Sharp scene
+
 scene = start_menu
 clock = pygame.time.Clock()
 is_running = True
 image_path = ""
 original_image_path = ""
-
-# initialize Sharp scene
-sharp_scene = Scene('res/theme.json', "sharp scene")
-rect = pygame.Rect(200, 600, 600, 30)
-sharp_scene.add_slider(rect, "slider")
-sharp_scene.add_button((915, 600), (200, 90), "exit")
 
 # -------initialize-------
 while is_running:

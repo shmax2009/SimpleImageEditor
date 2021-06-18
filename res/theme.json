@@ -68,7 +68,6 @@
       "border_width": "1",
       "shape": "rounded_rectangle",
       "shape_corner_radius": "10"
-
     }
   },
   "horizontal_slider.#sliding_button": {

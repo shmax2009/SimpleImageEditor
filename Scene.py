@@ -6,21 +6,29 @@ import settings
 class Scene:
     def __init__(self, theme: str, name: str):
         self.name = name
-        self.manager = pygame_gui.UIManager((settings.Width, settings.Height), theme)
+        self.manager = pygame_gui.UIManager(settings.update((settings.Width, settings.Height)), theme)
         self.buttons = dict()
         self.texts = list()
         self.images = dict()
         self.sliders = dict()
 
-    def add_button(self, position: (int, int), size: (int, int), text: str):
+    def add_button(self, position: (int, int), size: (int, int), text: str, font_: pygame.font.Font):
+        position_ = position
+        rect = pygame.Rect(position, size)
+        position = settings.update(position)
+        size = settings.update(size)
+        print(position, size)
         button = pygame_gui.elements.UIButton(
             relative_rect=pygame.Rect(position, settings.update(size)),
             text=text,
             manager=self.manager)
+
+        self.add_text(rect.center, text, (0, 0, 0), font_)
         self.buttons[text] = button
 
     def add_text(self, position: (int, int), text: str, color: (int, int, int),
                  font: pygame.font.Font):
+        position = settings.update(position)
         text_ = font.render(text, True, color)
         text_rect = text_.get_rect()
         text_rect.center = position
@@ -28,8 +36,12 @@ class Scene:
         self.texts.append((text_, text_rect))
 
     def add_image(self, path: str, position: (int, int), size: (int, int), name: str):
+        position = settings.update(position)
+        size = settings.update(size)
+        print(size)
         image = pygame.image.load(path)
         im_x, im_y = pygame.Surface.get_size(image)
+        print(im_x, im_y)
         fl_x, fl_y = (size)
         fl_x = min(im_x, fl_x)
         fl_y = min(im_y, fl_y)
@@ -43,12 +55,15 @@ class Scene:
         self.images[name] = (image, position)
 
     def add_slider(self, rect: pygame.Rect, name: str):
+        rect.size = settings.update(rect.size)
+        rect.left, rect.top = settings.update((rect.left, rect.top))
         slider = pygame_gui.elements.UIHorizontalSlider(rect, 100, (0, 200), manager=self.manager)
         self.sliders[name] = slider
         # slider.set_current_valu(50)
 
     def draw(self, window):
         self.manager.draw_ui(window)
+
         for text in self.texts:
             text_, rect = text
             window.blit(text_, rect)
