@@ -62,12 +62,12 @@ class Scene:
         # slider.set_current_valu(50)
 
     def draw(self, window):
+        for image in self.images.values():
+            image_, pos = image
+            window.blit(image_, pos)
+
         self.manager.draw_ui(window)
 
         for text in self.texts:
             text_, rect = text
             window.blit(text_, rect)
-
-        for image in self.images.values():
-            image_, pos = image
-            window.blit(image_, pos)

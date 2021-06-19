@@ -1,4 +1,4 @@
-from PIL import Image, ImageFilter
+from PIL import Image
 from PIL import ImageEnhance
 
 
@@ -20,3 +20,8 @@ class Controller:
         im = Image.open(path)
         enh = ImageEnhance.Sharpness(im)
         enh.enhance(factor / 100).save("sharp." + path.split(".")[-1])
+
+    def apply_contrast(self, path: str, factor: float):
+        im = Image.open(path)
+        enh = ImageEnhance.Contrast(im)
+        enh.enhance(factor / 100).save("contrast." + path.split(".")[-1])
