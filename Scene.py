@@ -1,6 +1,7 @@
 import pygame
 import pygame_gui
 import settings
+from Toggle import Toggle
 
 
 class Scene:
@@ -11,13 +12,14 @@ class Scene:
         self.texts = list()
         self.images = dict()
         self.sliders = dict()
+        self.toggles = dict()
 
     def add_button(self, position: (int, int), size: (int, int), text: str, font_: pygame.font.Font):
         position_ = position
         rect = pygame.Rect(position, size)
         position = settings.update(position)
         size = settings.update(size)
-        print(position, size)
+        # print(position, size)
         button = pygame_gui.elements.UIButton(
             relative_rect=pygame.Rect(position, size),
             text="",
@@ -38,10 +40,10 @@ class Scene:
     def add_image(self, path: str, position: (int, int), size: (int, int), name: str):
         position = settings.update(position)
         size = settings.update(size)
-        print(size)
+        # print(size)
         image = pygame.image.load(path)
         im_x, im_y = pygame.Surface.get_size(image)
-        print(im_x, im_y)
+        # print(im_x, im_y)
         fl_x, fl_y = (size)
         fl_x = min(im_x, fl_x)
         fl_y = min(im_y, fl_y)
@@ -61,6 +63,13 @@ class Scene:
         self.sliders[name] = slider
         # slider.set_current_valu(50)
 
+    def add_toggle(self, position: (int, int), size: (int, int), text: (str, str), name: str, font: pygame.font.Font):
+        position = settings.update(position)
+        size = settings.update(size)
+        rect = pygame.Rect(position, size)
+        toggle = Toggle(rect, text, manager=self.manager, font=font)
+        self.toggles[name] = toggle
+
     def draw(self, window):
         for image in self.images.values():
             image_, pos = image
@@ -71,3 +80,31 @@ class Scene:
         for text in self.texts:
             text_, rect = text
             window.blit(text_, rect)
+
+    def image_to_max_size(self, path: str, position: (int, int), size: (int, int), name: str):
+        position = settings.update(position)
+        size = settings.update(size)
+        image = pygame.image.load(path)
+        # im_x, im_y = pygame.Surface.get_size(image)
+        image = pygame.transform.scale(image, size)
+        self.images[name] = (image, position)
+
+
+    def image_to_min_size(self, path: str, position: (int, int), size: (int, int), name: str):
+        position = settings.update(position)
+        size = settings.update(size)
+        # print(size)
+        image = pygame.image.load(path)
+        im_x, im_y = pygame.Surface.get_size(image)
+        # print(im_x, im_y)
+        fl_x, fl_y = (size)
+        fl_x = min(im_x, fl_x)
+        fl_y = min(im_y, fl_y)
+        f_size = (fl_x, fl_y)
+        image = pygame.transform.scale(image, f_size)
+        x, y = position
+        sx, sy = size
+        x = x + (sx - fl_x) / 2
+        y = y + (sy - fl_y) / 2
+        position = (x, y)
+        self.images[name] = (image, position)
